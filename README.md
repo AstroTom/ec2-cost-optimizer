@@ -4,11 +4,17 @@
 [![Shell Script](https://img.shields.io/badge/Shell-Bash-green.svg)](https://www.gnu.org/software/bash/)
 [![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
 
+> [!CAUTION]
+> This project was created as a Kiro experiment and has only been tested on trivial examples
+> 
+
 Analyze your AWS EC2 instances and get actionable cost optimization recommendations by identifying cheaper alternative instance types.
 
 ## Features
 
-✅ **Dual Implementation** - Choose between Bash or Python scripts  
+✅ **Multiple Implementations** - Choose between Bash, Python, or Enhanced Python scripts  
+✅ **Real-Time Pricing** - Enhanced version uses AWS Pricing API for accurate costs  
+✅ **CloudWatch Integration** - Analyzes actual CPU utilization for rightsizing  
 ✅ **Graviton Analysis** - Identify savings from ARM-based Graviton instances  
 ✅ **x86 Alternatives** - Find AMD-based alternatives for drop-in replacements  
 ✅ **Detailed Breakdown** - Per-instance and aggregate savings analysis  
@@ -27,7 +33,11 @@ aws login
 # Run the bash script (no setup needed)
 ./ec2-cost-optimizer.sh
 
-# Or use the Python version
+# Or use the enhanced Python version (recommended)
+pip install -r requirements.txt
+python3 ec2-cost-optimizer-enhanced.py --profile your-profile --region us-east-1
+
+# Or use the original Python version
 ./get-temp-credentials.sh temp-profile
 python3 ec2-cost-optimizer.py temp-profile
 ```
@@ -46,7 +56,34 @@ python3 ec2-cost-optimizer.py temp-profile
 
 ## Created Files
 
-### 1. `ec2-cost-optimizer.sh` (Bash Version)
+### 1. `ec2-cost-optimizer-enhanced.py` (Enhanced Python Version) ⭐ **RECOMMENDED**
+Advanced Python script with real-time pricing and utilization analysis.
+
+**Features:**
+- ✅ Real-time pricing from AWS Pricing API (no hardcoded rates)
+- ✅ CloudWatch metrics integration for CPU utilization
+- ✅ Intelligent downsizing recommendations based on actual usage
+- ✅ Broader instance family coverage (T, M, C, R series)
+- ✅ Region-aware pricing
+- ✅ Multiple processor architecture recommendations (Graviton, AMD, Intel)
+
+**Usage:**
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run with metrics analysis (recommended)
+python3 ec2-cost-optimizer-enhanced.py --profile your-profile --region us-east-1
+
+# Run without metrics (faster)
+python3 ec2-cost-optimizer-enhanced.py --profile your-profile --no-metrics
+
+# Use environment variable for profile
+export AWS_PROFILE=your-profile
+python3 ec2-cost-optimizer-enhanced.py --region us-west-2
+```
+
+### 2. `ec2-cost-optimizer.sh` (Bash Version)
 A standalone bash script that uses AWS CLI to analyze EC2 instances and recommend cost-effective alternatives.
 
 **Features:**
@@ -61,7 +98,7 @@ chmod +x ec2-cost-optimizer.sh
 ./ec2-cost-optimizer.sh
 ```
 
-### 2. `ec2-cost-optimizer.py` (Python Version)
+### 3. `ec2-cost-optimizer.py` (Original Python Version)
 A Python script using boto3 that provides the same functionality with more extensibility.
 
 **Features:**
@@ -75,7 +112,7 @@ A Python script using boto3 that provides the same functionality with more exten
 python3 ec2-cost-optimizer.py [profile-name]
 ```
 
-### 3. `get-temp-credentials.sh`
+### 4. `get-temp-credentials.sh`
 Helper script to export your current AWS CLI credentials to a profile that boto3 can use.
 
 **Features:**
@@ -91,6 +128,21 @@ chmod +x get-temp-credentials.sh
 ```
 
 Default profile name is `temp-profile` if not specified.
+
+## Version Comparison
+
+| Feature | Bash Script | Original Python | Enhanced Python ⭐ |
+|---------|-------------|-----------------|-------------------|
+| Real-time AWS Pricing | ❌ | ❌ | ✅ |
+| CloudWatch Metrics | ❌ | ❌ | ✅ |
+| Utilization-based Rightsizing | ❌ | ❌ | ✅ |
+| Region-aware Pricing | ❌ | ❌ | ✅ |
+| Instance Coverage | Limited | Limited | Extensive (T/M/C/R) |
+| Setup Required | None | Minimal | pip install |
+| Speed | Fast | Fast | Moderate (API calls) |
+| Accuracy | Approximate | Approximate | Real-time |
+
+**Recommendation:** Use the Enhanced Python version for production cost analysis. Use Bash/Original Python for quick checks.
 
 ## Workflow
 
