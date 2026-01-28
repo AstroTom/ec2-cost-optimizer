@@ -50,10 +50,12 @@ python3 ec2-cost-optimizer.py temp-profile
 ## Table of Contents
 
 - [Created Files](#created-files)
+- [Version Comparison](#version-comparison)
 - [Workflow](#workflow)
 - [Sample Output](#sample-output)
 - [Understanding the Summary](#understanding-the-summary)
 - [Recommendations Explained](#recommendations-explained)
+- [Algorithm Details](#algorithm-details)
 - [How to Change Instance Types](#how-to-change-instance-types)
 - [Prerequisites](#prerequisites)
 - [Troubleshooting](#troubleshooting)
@@ -284,6 +286,28 @@ The summary section provides two optimization scenarios:
 - Latest generation ARM processors
 - Significant performance improvements
 - Best for: Compute-intensive workloads
+
+## Algorithm Details
+
+The enhanced script uses a multi-stage analysis approach combining real-time AWS pricing, CloudWatch metrics, and rule-based recommendations. For a detailed explanation of how the algorithm works, see [ALGORITHM.md](ALGORITHM.md).
+
+**Key Features:**
+- Real-time pricing from AWS Pricing API (region-specific)
+- CloudWatch CPU utilization analysis (14-day window)
+- Rule-based alternative generation (Graviton, AMD, Intel, downsizing)
+- Best-per-category savings tracking
+
+**Decision Logic:**
+- CPU < 20% → Suggest downsizing (50% savings potential)
+- Current generation → Suggest Graviton (~20% savings)
+- Older generation → Suggest latest generation upgrade
+
+**Comparison with AWS Services:**
+- Uses CloudWatch data (like Compute Optimizer) but simpler logic
+- Does NOT use AWS Cost Optimization Hub or Compute Optimizer APIs
+- Complementary to AWS native tools, not a replacement
+
+See [ALGORITHM.md](ALGORITHM.md) for complete details, decision trees, and comparisons with AWS Compute Optimizer.
 
 ## How to Change Instance Types
 
