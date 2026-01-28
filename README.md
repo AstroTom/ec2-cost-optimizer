@@ -6,6 +6,11 @@
 
 Analyze your AWS EC2 instances and get actionable cost optimization recommendations by identifying cheaper alternative instance types.
 
+> [!CAUTION]
+> This project was created as a Kiro experiment and has only been tested on trivial examples
+> 
+
+
 ## Features
 
 ✅ **Dual Implementation** - Choose between Bash or Python scripts  
@@ -315,3 +320,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Disclaimer
 
 These scripts are provided as-is for cost optimization analysis. Always test instance type changes in non-production environments first. The authors are not responsible for any issues arising from instance type modifications.
+
