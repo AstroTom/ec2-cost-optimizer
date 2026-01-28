@@ -1,17 +1,17 @@
-# EC2 Cost Optimization Tools
+# EC2 Cost Optimization Recommendation scripts
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Shell Script](https://img.shields.io/badge/Shell-Bash-green.svg)](https://www.gnu.org/software/bash/)
 [![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
 
-> [!CAUTION]
-> This project was created as a Kiro experiment and has only been tested on trivial examples
-> 
-
 Analyze your AWS EC2 instances and get actionable cost optimization recommendations by identifying cheaper alternative instance types.
 
 > [!CAUTION]
 > This project was created as a Kiro experiment and has only been tested on trivial examples
+> 
+
+> [!Note]
+> The scripts do not use the AWS Cost Optimization Hub or AWS Compute Optimizer. If those features are enabled, it could make use of CloudWatch data to see if any instances are over or under provisioned. Both features in AWS are disabled by default. The Cost Optimization Hub can only be enabled from the Management (Payer) account.
 > 
 
 
@@ -372,4 +372,5 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Disclaimer
 
 These scripts are provided as-is for cost optimization analysis. Always test instance type changes in non-production environments first. The authors are not responsible for any issues arising from instance type modifications.
+
 
