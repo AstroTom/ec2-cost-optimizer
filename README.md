@@ -29,22 +29,20 @@ Analyze your AWS EC2 instances and get actionable cost optimization recommendati
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ec2-cost-optimizer.git
+git clone https://github.com/AstroTom/ec2-cost-optimizer
 cd ec2-cost-optimizer
 
 # Authenticate with AWS
+# e.g.
 aws login
 
 # Run the bash script (no setup needed)
 ./ec2-cost-optimizer.sh
 
-# Or use the enhanced Python version (recommended)
+# Or use the Python version
 pip install -r requirements.txt
-python3 ec2-cost-optimizer-enhanced.py --profile your-profile --region us-east-1
+python3 ec2-cost-optimizer-enhanced.py --region us-east-1 --profile your-profile
 
-# Or use the original Python version
-./get-temp-credentials.sh temp-profile
-python3 ec2-cost-optimizer.py temp-profile
 ```
 
 ## Table of Contents
@@ -63,7 +61,7 @@ python3 ec2-cost-optimizer.py temp-profile
 
 ## Created Files
 
-### 1. `ec2-cost-optimizer-enhanced.py` (Enhanced Python Version) ⭐ **RECOMMENDED**
+### 1. `ec2-cost-optimizer-enhanced.py` 
 Advanced Python script with real-time pricing and utilization analysis.
 
 **Features:**
@@ -103,20 +101,6 @@ A standalone bash script that uses AWS CLI to analyze EC2 instances and recommen
 ```bash
 chmod +x ec2-cost-optimizer.sh
 ./ec2-cost-optimizer.sh
-```
-
-### 3. `ec2-cost-optimizer.py` (Original Python Version)
-A Python script using boto3 that provides the same functionality with more extensibility.
-
-**Features:**
-- Uses boto3 AWS SDK
-- Supports AWS profiles
-- More detailed analysis capabilities
-- Easier to extend and customize
-
-**Usage:**
-```bash
-python3 ec2-cost-optimizer.py [profile-name]
 ```
 
 ### 4. `get-temp-credentials.sh`
@@ -396,5 +380,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Disclaimer
 
 These scripts are provided as-is for cost optimization analysis. Always test instance type changes in non-production environments first. The authors are not responsible for any issues arising from instance type modifications.
+
 
 
